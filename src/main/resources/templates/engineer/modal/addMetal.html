@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content bg-dark">
+    <div class="modal-header">
+      <h5 class="modal-title text-warning" id="addModalLabel" th:text="#{metal.create}"></h5>
+      <button type="button" class="btn-close btn-warning" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="custom-alert"></div>
+
+      <form id="add_user" th:action="@{/admin/register}" th:method="post" th:object="${userDTO}">
+
+        <div class="mb-3">
+          <label class="form-label text-warning" for="name" th:text="#{user.name}"></label>
+          <input class="form-control bg-warning border-dark" type="text" id="name" th:field="*{name}" onblur="checkIfFree()" th:name="name"/>
+          <!--                    <div id="msg" style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>-->
+          <!--                    <div id="err" style="color: red">[[#{uniqueName.message}]]</div>-->
+          <!--                    <div id="suc" style="color: green">[[#{name.not.exists}]]</div>-->
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-warning" th:text="#{user.password}"></label>
+          <input class="form-control bg-warning border-dark" type="password" id="password" th:field="*{password}" th:name="password"/>
+          <!--                    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>-->
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-warning" th:text="#{user.pas.confirm} + ':'"></label>
+          <input class="form-control bg-warning border-dark" type="password" id="confirmPassword" th:field="*{confirmPassword}"/>
+          <!--                    <div style="color: red" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></div>-->
+        </div>
+        <div class="mb-3">
+          <label class="form-label text-warning" th:text="#{user.roles}"></label>
+          <select class="form-select bg-warning border-dark" aria-label="Default select example" th:field="*{roles}">
+            <option th:each="role : ${roles}" th:value="${role}" th:text="#{${role}}">
+            </option>
+          </select>
+          <!--                    <div style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>-->
+        </div>
+        <div class="text-center">
+          <button class="btn btn-outline-success" type="submit">Register</button>
+          <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+
+</html>

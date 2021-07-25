@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-dark">
+        <div class="modal-header">
+            <h5 class="modal-title text-warning" id="addModalLabel" th:text="#{user.edit}"></h5>
+            <button type="button" class="btn-close btn-warning" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="custom-alert"></div>
+
+            <form id="edit_user" th:action="@{/admin/update}" th:method="post" th:object="${userDTO}">
+
+                <input type="hidden"  th:field="*{id}" name="id" id="edit_user_id">
+                <div class="mb-3">
+                    <label class="form-label text-warning" for="name" th:text="#{user.name}"></label>
+                    <input class="form-control bg-warning border-dark" type="text" id="name" th:field="*{name}" onblur="checkIfFree()" th:name="name"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-warning" th:text="#{user.password}"></label>
+                    <input class="form-control bg-warning border-dark" type="password" id="password" th:field="*{password}" th:name="password"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-warning" th:text="#{user.pas.confirm} + ':'"></label>
+                    <input class="form-control bg-warning border-dark" type="password" id="confirmPassword" th:field="*{confirmPassword}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-warning" th:text="#{user.roles}"></label>
+                    <select class="form-select bg-warning border-dark"  th:field="*{roles}" multiple="multiple" required>
+                        <option th:each="role : ${roles}" th:value="${role}" th:text="#{${role}}">
+                        </option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-outline-success" type="submit">Save changes</button>
+                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</html>

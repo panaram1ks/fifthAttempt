@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div th:if="${users != null }">
+
+    <div th:replace="adm/actionBar"></div>
+
+    <table class="table table-dark table-hover">
+        <div th:replace="fragments/alert"></div>
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{user.name}"></th>
+            <th scope="col" th:text="#{user.roles}"></th>
+            <th scope="col">Операции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td scope="row" th:text="${user.name}"></td>
+            <td scope="row" th:text="${user.getAllRoles()}"></td>
+
+            <td scope="row">
+                <a th:href="@{/admin/editUser/(id=*{user.getId()})}" class="btn btn-warning editBtn">
+                    Edit
+                </a>
+                <a th:href="@{/admin/deleteUser/(id=*{user.getId()})}" class="btn btn-danger deleteBtn">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/generalHeader :: head(~{::script}, ~{})">
+  <script type="text/javascript" th:src="@{js/engineer/engineer.js}"></script>
+</div>
+
+<header>
+  <div th:replace="fragments/nav-bar :: nav_bar"></div>
+</header>
+<div>Hi engineer</div>
+<main class="container-fluid">
+
+</main>
+
+</html>
